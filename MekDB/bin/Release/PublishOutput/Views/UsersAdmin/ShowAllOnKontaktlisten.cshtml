@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MekDB.Models.ApplicationUser>
+
+
+<h2>Alle brugere som er på Kontaktlisten</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fornavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Efternavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hold)
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fornavn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Efternavn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hold)
+            </td>
+            <td>               
+                @Html.ActionLink("Fjern bruger fra Kontaktlisten", "RemoveUserFromKontaktlisten", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

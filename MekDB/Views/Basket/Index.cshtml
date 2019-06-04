@@ -1,0 +1,51 @@
+﻿@model MekDB.ViewModels.BasketViewModel
+
+@{
+    ViewBag.Title = "Bekræftelse";
+}
+<h2> @ViewBag.Title </h2>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4"><label>VareNr</label></div>
+        <div class="col-md-3"><label>Produktnavn</label></div>
+        <div class="col-md-1"><label>@TempData["Tekst"]</label></div>
+
+    </div>
+    <hr />
+
+   
+
+    <div class="row">
+
+        <div class="col-md-4">
+            @((Model.BasketLines[0].Product.VareNr))
+        </div>
+
+        <div class="col-md-3">
+            @((Model.BasketLines[0].Product.ProduktNavn))
+        </div>
+
+        <div class="col-md-3">
+           @TempData["Tal"]
+        </div>
+
+        <div class="col-md-1">
+            @Html.ActionLink("Fortryd", "FortrydOrder", "Basket", new { id = Model.BasketLines[0].Product.ID }, new { @class = "lnkGetReward btn btn-danger btn-md" })
+            @*@Html.ActionLink("Fortryd", "FortrydOrder", "Basket", new { id = Model.BasketLines[0].Product.ID }, null)*@
+        </div>
+
+        <div class="col-md-1">
+            @Html.ActionLink("Godkend", "Review", "Orders", new { id = Model.BasketLines[0].Product.ID }, new { @class = "lnkGetReward btn btn-success btn-md" })
+            @*@Html.ActionLink("Godkend", "Review", "Orders", new { id = Model.BasketLines[0].Product.ID }, null)*@
+        </div>
+    </div>
+    <hr />
+
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

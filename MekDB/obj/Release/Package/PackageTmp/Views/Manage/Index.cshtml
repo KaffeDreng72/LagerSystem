@@ -1,0 +1,34 @@
+﻿
+@model MekDB.Models.ApplicationUser
+@{
+    ViewBag.Title = "Min Info";
+}
+<h2>@ViewBag.Title</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        @*@Html.Partial("_UserDetailsPartial", Model)*@
+
+        <dt>@Html.DisplayNameFor(model => model.Fornavn)</dt>
+        <dd>@Html.DisplayName(Model.Fornavn)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Efternavn)</dt>
+        <dd>@Html.DisplayName(Model.Efternavn)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Hold)</dt>
+        <dd>@Html.DisplayName(Model.Hold)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.KontaktListen)</dt>
+        <dd>@Html.DisplayName(Model.KontaktListen)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Address.TelefonNr)</dt>
+        <dd>@Html.DisplayName(Model.Address.TelefonNr.ToString())</dd>
+
+        <dt>
+            Kodeord
+        </dt>
+        <dd>
+            @Html.ActionLink("Skift Kodeord", "ChangePassword")
+        </dd>
+    </dl>
+</div>

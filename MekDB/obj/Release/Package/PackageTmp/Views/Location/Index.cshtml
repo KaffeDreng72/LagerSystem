@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MekDB.Models.Location>
+
+@{
+    ViewBag.Title = "Lokation";
+}
+<h2>@ViewBag.Title</h2>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Opret Ny Lokation", "Create")
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            <h4>@Html.DisplayNameFor(model => model.LokationName)</h4>
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@Html.ActionLink(item.LokationName, "Index", "Products", new { category = item.LokationName }, null)*@
+                @Html.Label(item.LokationName)
+            </td>
+            <td>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Rediger", "Edit", new { id = item.ID })
+                   
+                }
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,130 @@
+﻿@model MekDB.Models.Product
+
+@{
+    ViewBag.Title = "Vare Information";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+
+
+<div>
+
+    <dl class="dl-horizontal">
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>*@
+
+        <dd>
+            <img class="img-responsive" width="400" height="300" src="@Url.Action("getImage", "Products", new { id = Model.ID })" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.LokationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.LokationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VareNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VareNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProduktNavn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProduktNavn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DanskNavn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DanskNavn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Suppliers.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Suppliers.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LagerStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LagerStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BestilVed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BestilVed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bemærkning)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bemærkning)
+        </dd>
+
+        
+        @*<hr />*@
+
+        
+
+        <dt>
+            Indsæt antal på lager:
+        </dt>
+        <dd>
+            @using (Html.BeginForm("AddToBasketAntalInd", "Basket"))
+            {                
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+
+                @Html.DropDownList("AntalInd", Enumerable.Range(1, 99).Select(i => new SelectListItem{ Text = i.ToString(), Value = i.ToString() }))
+                <input type="submit" class="btn btn-primary btn-xs" value="Indsæt Antal">
+            }
+        </dd>
+        @*<hr />*@
+        <dt>
+            Tag antal fra lager:
+        </dt>
+        <dd>
+            @using (Html.BeginForm("AddToBasketAntalUd", "Basket"))
+            {
+                var tal = Model.LagerStatus;
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+
+                @Html.DropDownList("AntalUd", Enumerable.Range(1, tal).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+                <input type="submit" class="btn btn-primary btn-xs" value="Tag Antal">
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+   @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+   {
+    @Html.ActionLink("Rediger Vare", "Edit", new { id = Model.ID })
+    @Html.Raw(" | ")
+   }
+    @Html.ActionLink("Tilbage", "Index")
+</p>

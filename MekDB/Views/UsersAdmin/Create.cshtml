@@ -1,0 +1,112 @@
+﻿@model MekDB.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Opret Bruger";
+}
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fornavn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fornavn, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.ValidationMessageFor(model => model.Fornavn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.Efternavn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Efternavn, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.ValidationMessageFor(model => model.Efternavn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Hold, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Hold, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.ValidationMessageFor(model => model.Hold, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.KontaktListen, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KontaktListen, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.ValidationMessageFor(model => model.KontaktListen, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.TelefonNr, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address.TelefonNr, new { htmlAttributes = new { @class = "form-control", @type = "tel" } })
+                @Html.ValidationMessageFor(model => model.Address.TelefonNr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Skal på Kontakt listen?
+            </label>
+            <div class="col-md-10">               
+                    @Html.RadioButtonFor(m => m.KontaktListen, "Ja") Ja
+                    @Html.RadioButtonFor(m => m.KontaktListen, "Nej") Nej                
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Vælg Bruger Rolle
+            </label>
+            <div class="col-md-10">
+                @foreach (var item in (SelectList)ViewBag.RoleId)
+                {
+                    <input type="radio" name="SelectedRoles" value="@item.Value"
+                           class="checkbox-inline" checked="checked" />
+                    @Html.Label(item.Value, new { @class = "control-label" })
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Opret" class="btn btn-success btn-md" />
+            </div>
+        </div> 
+     </div>  
+}
+
+<div>
+    @Html.ActionLink("Tilbage", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+<h2>@ViewBag.Title</h2>
+<div class="container">
+    <div class="row">
+        @Html.ActionLink("Upload Billeder", "Index", "ProductImages")
+    </div>
+    <div class="row">
+       @Html.ActionLink("Opret Lokationer", "Index", "Categories")
+    </div>
+    <div class="row">
+        @Html.ActionLink("Opret Brugere", "Index", "UsersAdmin")
+    </div>
+    <div class="row">
+        @Html.ActionLink("Vis Logbogen", "Index", "Orders")
+    </div>
+</div>
+

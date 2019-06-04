@@ -1,0 +1,62 @@
+﻿@model MekDB.Models.ApplicationUser
+@{
+    ViewBag.Title = "Bruger detaljer";
+}
+<h2>@ViewBag.Title</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fornavn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fornavn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Efternavn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Efternavn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hold)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hold)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KontaktListen)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KontaktListen)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.TelefonNr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.TelefonNr)
+        </dd>
+
+    </dl>
+</div>
+<div class="container">
+    <div class="row">
+        <h4>Denne bruger tilhører Gruppen:</h4>
+    </div>
+    @if (ViewBag.RoleNames.Count == 0)
+    {
+        <hr />
+        <p>No roles found for this user</p>
+    }
+    @foreach (var item in ViewBag.RoleNames)
+    {
+        <div class="row">
+            @item
+        </div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Rediger Bruger", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Tilbage", "Index")
+</p>

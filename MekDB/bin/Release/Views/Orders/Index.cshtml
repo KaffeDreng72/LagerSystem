@@ -1,0 +1,90 @@
+﻿
+@model IEnumerable<MekDB.Models.Order>
+
+@{
+    ViewBag.Title = "Logbog";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Index", "Orders", FormMethod.Get))
+{
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label>Søg i Logbogen:</label>
+        </div>
+        <div class="col-md-3">
+            @Html.TextBox("OrderSearch", null, new { @class = "form-control", @placeholder = "" })
+        </div>
+        <div class="col-md-2">
+            <label>Dato Søg:</label>
+        </div>
+
+        <div class="col-md-2">
+            @Html.TextBox("StartDate", "{0:yyyy-MM-dd HH:mm:ss}", new { @class = "date-picker", @type = "date" })
+        </div>
+
+        <div class="col-md-2">
+            @Html.TextBox("EndDate", "{0:yyyy-MM-dd HH:mm:ss}", new { @class = "date-picker", @type = "date" })
+        </div>
+
+        <button type="submit" class="btn btn-default">Søg</button>
+    </div>
+}
+
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.VareNr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProduktNavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AntalInd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AntalUd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOgTid)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>           
+            <td>
+                @Html.DisplayFor(modelItem => item.VareNr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProduktNavn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntalInd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntalUd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOgTid)
+            </td>
+        </tr>
+    }
+</table>
+
+

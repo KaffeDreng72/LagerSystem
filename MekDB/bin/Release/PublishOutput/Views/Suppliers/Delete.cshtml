@@ -1,0 +1,31 @@
+﻿@model MekDB.Models.Suppliers
+
+@{
+    ViewBag.Title = "Slet";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Er du sikker op at du vil slette @Html.DisplayFor(model => model.Name)</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Slet" class="btn btn-default" /> |
+            @Html.ActionLink("Tilbage", "Index")
+        </div>
+    }
+</div>

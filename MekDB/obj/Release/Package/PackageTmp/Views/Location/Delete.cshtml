@@ -1,0 +1,32 @@
+﻿@model MekDB.Models.Location
+
+@{
+    ViewBag.Title = "Slet";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Er du sikker på du vil slette dette?</h3>
+<div>
+    <h4>Kategori</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LokationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LokationName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Slet" class="btn btn-default" /> |
+            @Html.ActionLink("Tilbage", "Index")
+        </div>
+    }
+</div>

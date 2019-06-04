@@ -1,0 +1,69 @@
+﻿
+@model IEnumerable<MekDB.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Brugere";
+}
+<h2>@ViewBag.Title</h2>
+<p>
+    @Html.ActionLink("Opret Ny Bruger", "Create")
+</p>
+<p>
+    @Html.ActionLink("Nulstil Kodeord for burger", "ResetPassword", "Account")
+</p>
+<p>
+    @Html.ActionLink("Vis alle der er på Kontaktlisten", "ShowAllOnKontaktlisten", "UsersAdmin")
+</p>
+
+    @using (Html.BeginForm("Index", "UsersAdmin", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+    {
+        <section>
+            <div class="form-group">
+                @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "" })
+            </div>
+
+            <button type="submit" class="btn btn-default">Søg</button>
+        </section>
+    }
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fornavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Efternavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hold)
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fornavn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Efternavn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hold)
+            </td>
+            <td>
+                @Html.ActionLink("Bruger detaljer", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Rediger bruger", "Edit", new { id = item.Id })                                
+            </td>
+        </tr>
+    }
+</table>
+

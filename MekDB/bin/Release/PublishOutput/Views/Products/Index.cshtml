@@ -1,0 +1,112 @@
+﻿
+@model IEnumerable<MekDB.Models.Product>
+
+<html>
+ <head>
+    <style>
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .center {
+            margin: auto;
+            width: 60%;            
+            padding: 10px;
+        }
+        section {
+            display: block;
+            margin: 0 auto;
+        }      
+
+    </style>
+ </head>
+ <body>
+
+    <br />
+    <img src="~/ForsideImages/dbno1.jpg" alt="Paris" style="width:100%">
+    <br />
+
+    
+        @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+        {
+            <section>
+                <div class="form-group">
+                    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "" })
+                </div>
+
+               <button type="submit" class="btn btn-default">Søg</button>
+            </section>
+        }
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().VareNr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().ProduktNavn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().DanskNavn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Suppliers)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Location.LokationName)
+                </th>               
+                <th></th>
+            </tr>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VareNr)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProduktNavn)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DanskNavn)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Suppliers.Name)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location.LokationName)
+                        </td>
+
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("  Vare Info  ", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("  Rediger Vare  ", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("  Slet Vare  ", "Delete", new { id = item.ID })
+                            </td>
+                        }
+
+                        else if (Request.IsAuthenticated && User.IsInRole("Users"))
+                        {
+                            <td>
+                                @Html.ActionLink(" Vare Info ", "Details", new { id = item.ID })
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+
+        </table>
+  
+
+        <br />
+          <img src="~/ForsideImages/f.jpg" alt="Paris" style="width:60%">
+        <br />
+ </body>
+</html>
